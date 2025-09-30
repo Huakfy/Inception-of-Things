@@ -1,0 +1,47 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://vagrantcloud.com/search.
+  config.vm.box = "debian/bookworm64"
+  config.vm.box_version = "12.20250126.1"
+
+  # Synchro du fichier via NFS
+  config.vm.synced_folder ".", "/vagrant", type: "nfs", nfs_udp: false, nfs_version: 4
+
+  # Create server machine
+  config.vm.define "mjournoS" do |server|
+    server.vm.hostname = "mjournoS"
+    # Create a private network, which allows host-only access to the machine
+    # using a specific IP.
+    server.vm.network "private_network", ip: "192.168.56.110"
+    server.vm.provision :shell, path: "scripts/server.sh"
+  end
+
+  # Create worker machine
+  config.vm.define "mjournoSW" do |worker|
+    worker.vm.hostname = "mjournoSW"
+    # Create a private network, which allows host-only access to the machine
+    # using a specific IP.
+    worker.vm.network "private_network", ip: "192.168.56.111"
+    worker.vm.provision :shell, path: "scripts/worker.sh"
+  end  
+
+  # Provider-specific configuration so you can fine-tune various
+  # backing providers for Vagrant. These expose provider-specific options.
+  # Example for VirtualBox:
+  #
+  config.vm.provider "virtualbox" do |vb|
+    # Display the VirtualBox GUI when booting the machine
+    # vb.gui = true
+
+    # Customize the amount of memory on the VM:
+    vb.memory = "2048"
+
+    vb.cpus = 4
+  end
+  #
+  # View the documentation for the provider you are using for more
+  # information on available options.
+end
