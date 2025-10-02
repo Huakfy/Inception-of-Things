@@ -14,15 +14,17 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   # OS de la VM
   config.vm.box = "centos/stream10"
+  # Version de l'OS
   config.vm.box_version = "20250929.0"
-  
+
+  # Synchro du fichier via NFS
   config.vm.synced_folder ".", "/vagrant", type: "nfs", nfs_udp: false, nfs_version: 4
 
   config.vm.provider "virtualbox" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
+    # Display the VirtualBox GUI when booting the machine
+    # vb.gui = true
+
+    # Customize the amount of memory on the VM:
     vb.memory = "1024"
     vb.cpus = 1
   end
@@ -30,8 +32,9 @@ Vagrant.configure("2") do |config|
   config.vm.define "lgiraultS" do |control|
     # Setup le nom de la machine
     control.vm.hostname = "lgiraultS"
-    #Setup l'IP de par default
+    # Setup l'IP de par default
     control.vm.network "private_network", ip: "192.168.56.110"
+    # Script shell a exec au lancement de la VM
     control.vm.provision "shell", path: "./scripts/server.sh"
   end
 
@@ -40,6 +43,7 @@ Vagrant.configure("2") do |config|
     control.vm.hostname = "lgiraultSW"
     #Setup l'IP de par default
     control.vm.network "private_network", ip: "192.168.56.111"
+    # Script shell a exec au lancement de la VM
     control.vm.provision "shell", path: "./scripts/worker.sh"
   end
 
