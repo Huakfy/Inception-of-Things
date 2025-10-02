@@ -14,6 +14,8 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   # OS de la VM
   config.vm.box = "centos/stream10"
+  config.vm.box_version = "20250929.0"
+  
   config.vm.synced_folder ".", "/vagrant", type: "nfs", nfs_udp: false, nfs_version: 4
 
   config.vm.provider "virtualbox" do |vb|
@@ -30,7 +32,7 @@ Vagrant.configure("2") do |config|
     control.vm.hostname = "lgiraultS"
     #Setup l'IP de par default
     control.vm.network "private_network", ip: "192.168.56.110"
-    control.vm.provision "shell", path: "./script/server.sh"
+    control.vm.provision "shell", path: "./scripts/server.sh"
   end
 
   config.vm.define "lgiraultSW" do |control|
@@ -38,7 +40,7 @@ Vagrant.configure("2") do |config|
     control.vm.hostname = "lgiraultSW"
     #Setup l'IP de par default
     control.vm.network "private_network", ip: "192.168.56.111"
-    control.vm.provision "shell", path: "./script/worker.sh"
+    control.vm.provision "shell", path: "./scripts/worker.sh"
   end
 
 
