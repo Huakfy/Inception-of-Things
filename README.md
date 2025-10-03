@@ -19,3 +19,7 @@ Please disable the KVM kernel extension
 ```bash
 modprobe -r kvm_intel
 ```
+
+https://argo-cd.readthedocs.io/en/stable/getting_started/
+
+sudo k3d cluster delete p3
