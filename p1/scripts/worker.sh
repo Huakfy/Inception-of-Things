@@ -3,7 +3,8 @@
 set -eu
 
 # Install NFS-utils pour le sync-file
-sudo apt-get update & apt-get upgrade -y
+sudo apt-get update
+sudo apt-get upgrade -y
 sudo apt-get install -y curl nfs-kernel-server
 
 # On attend que le token soit dispo dans le dossier partage
