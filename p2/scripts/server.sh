@@ -3,10 +3,9 @@
 set -eu
 
 sudo apt-get update
-sudo apt-get upgrade -y
 sudo apt-get install -y curl
 
-# Configure le serveur 
+# Configure le serveur
 # K3S_KUBECONFIG_MODE: permet de configurer les droit du fichier de config de k3s
 # INSTALL_K3S_EXEC: variable d'env pour script d'installation de k3s (Indique comment installer)
 # server: Permet d'installer le node en mode serveur et pas en mode agent

@@ -8,7 +8,6 @@ NC='\033[0m' # No Color
 
 update_apt_get() {
   sudo apt-get update
-  sudo apt-get upgrade -y
 }
 
 install_docker() {
